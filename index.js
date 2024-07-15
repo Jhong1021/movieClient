@@ -3,7 +3,7 @@
 
 function calculateTotalAmount(orderAmounts) {
 
-	if(!Array.isArray(orderAmounts)) {
+	if(!Array.isArray(orderAmounts)) {                 
 
 		return undefined;
 	} 

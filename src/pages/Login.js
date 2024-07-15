@@ -1,22 +1,22 @@
 import { useState, useEffect, useContext } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { Navigate } from 'react-router-dom'; 
 import Swal from 'sweetalert2';
 import UserContext from '../UserContext';
 
 export default function Login() {
 
-	const { user, setUser } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
 
-	const [email, setEmail] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const [isActive, setIsActive] = useState(true);
     
     function authenticate(e) {
 
-            e.preventDefault();
-            fetch('https://movieappapi-xi7a.onrender.com/users/login',{
+        e.preventDefault();
+        fetch('https://movieappapi-xi7a.onrender.com/users/login',{
 
             method: 'POST',
             headers: {
@@ -101,55 +101,75 @@ export default function Login() {
 
         if(email !== "" && password !==""){
 
-			setIsActive(true)
+            setIsActive(true)
 
-		} else {
+        } else {
 
-			setIsActive(false)
+            setIsActive(false)
 
-		}
+        }
 
     }, [email, password]);
 
     return (
-	    (user.id !== null) ?
+        (user.id !== null) ?
         <Navigate to="/movies" />
 
         :
 
-        <Form onSubmit={(e) => authenticate(e)}>
-            <h1 className="my-5 text-center">Login</h1>
-            <Form.Group controlId="userEmail">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control 
-                    type="text"
-                    placeholder="Enter email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-            </Form.Group>
+        <div
+            style={{
+                backgroundImage: "url('https://wallpapers.com/images/featured/movie-9pvmdtvz4cb0xl37.jpg')",
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                width: '100%',
+                height: '100vh',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                color: 'white',
+            }}
+        >
+            <Container>
+                <Row className="justify-content-center">
+                    <Col xs={12} sm={8} md={6} lg={4} className="p-4" style={{ backgroundColor: 'rgba(0, 0, 0, 0.75)', borderRadius: '10px' }}>
+                        <Form onSubmit={(e) => authenticate(e)}>
+                            <h1 className="my-5 text-center">Login</h1>
+                            <Form.Group controlId="userEmail">
+                                <Form.Label>Email address</Form.Label>
+                                <Form.Control 
+                                    type="email"
+                                    placeholder="Enter email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                />
+                            </Form.Group>
 
-            <Form.Group controlId="password">
-                <Form.Label>Password</Form.Label>
-                <Form.Control 
-                    type="password" 
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-            </Form.Group>
+                            <Form.Group controlId="password">
+                                <Form.Label>Password</Form.Label>
+                                <Form.Control 
+                                    type="password" 
+                                    placeholder="Password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                />
+                            </Form.Group>
 
-                { isActive ? 
-                <Button className="mt-3" variant="primary" type="submit" id="submitBtn">
-                    Submit
-                </Button>
-                : 
-                <Button className="mt-3" variant="danger" type="submit" id="submitBtn" disabled>
-                    Submit
-                </Button>
-            }
-        </Form>
+                            { isActive ? 
+                                <Button className="mt-3 w-100" variant="primary" type="submit" id="submitBtn">
+                                    Submit
+                                </Button>
+                                : 
+                                <Button className="mt-3 w-100" variant="danger" type="submit" id="submitBtn" disabled>
+                                    Submit
+                                </Button>
+                            }
+                        </Form>
+                    </Col>
+                </Row>
+            </Container>
+        </div>
     )
 }

@@ -11,7 +11,7 @@
         "getMovieComments":"/getComments"
 },
     "credentials": {
-        "email":"user@mail.com",
-        "password": "user1234"
+        "email":"tuban@mail.com",
+        "password": "tuban1234"
     }
 }
